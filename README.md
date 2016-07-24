@@ -1,1 +1,1 @@
-(http://www.comp.hkbu.edu.hk/~mandel/kingdom/)[API ref]
+[API ref](http://www.comp.hkbu.edu.hk/~mandel/kingdom/)
