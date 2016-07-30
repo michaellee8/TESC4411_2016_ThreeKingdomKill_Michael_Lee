@@ -3,7 +3,7 @@
 
 This is the final project of course TECS4411 "Coding Heroes of the Three Kingdoms", studied at 2016 summer holiday.
 
-The aim of such a project is to imoement skill learnt in the course.
+The aim of such a project is to practice skill learnt in the course.
 
 Partner is/are: 
 
