@@ -146,20 +146,13 @@ public class AICommon extends Hero {
         while (this.getAttackTimes() > 0 && canAttack()) { // use Card.Attack
             this.use(Card.Attack);
         }
-        while (canAttack() && this.countHandCards(Card.Agility) > 0) { // use
-                                                                       // Card.Atack
-                                                                       // again
-                                                                       // if
-                                                                       // still
-                                                                       // have
-                                                                       // Card.Agility
+        while (canAttack() && this.countHandCards(Card.Agility) > 0) { // use Card.Atack again if still have Card.Agility
             this.deactivate(Card.Agility);
             this.use(Card.Agility);
             this.use(Card.Attack);
         }
         inMyTurn();
-        while (this.countHandCards(Card.Vitality) > 0 && this.getHp() + 75 <= this.getMaxHp()) { // use
-                                                                                                 // Card.Vitality
+        while (this.countHandCards(Card.Vitality) > 0 && this.getHp() + 75 <= this.getMaxHp()) { // use Card.Vitality
             if (Arrays.asList(this.getBuffList()).contains(Card.Vitality)) {
                 this.deactivate(Card.Vitality);
                 this.use(Card.Vitality);
@@ -182,8 +175,7 @@ public class AICommon extends Hero {
                 }
             }
         }
-        while (this.countHandCards(Card.Heal) > 0 && this.getHp() + 75 <= this.getMaxHp()) { // use
-                                                                                             // Card.Heal
+        while (this.countHandCards(Card.Heal) > 0 && this.getHp() + 75 <= this.getMaxHp()) { // use Card.Heal
             this.use(Card.Heal);
         }
         while (this.countHandCards(Card.Shield) > 0) { // use Card.Shield

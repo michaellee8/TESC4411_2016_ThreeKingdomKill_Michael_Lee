@@ -3,10 +3,6 @@ package ThreeKingdomKillAI;
 import comp.*;
 
 public class AIZhaoYun extends AICommon {
-    public AIZhaoYun() {
-
-    }
-
     public final void join(int index) {
         GameMaster master = GameMaster.getInstance();
         GameMaster.Player player = master.players[index];

@@ -28,7 +28,6 @@ public class DummyMaChao extends HeroMaChao {
 
 	@Override
 	public void beingAttack() {
-
 		//如果生命值小於等於300點、對方可攻撃次數多於1時而手上有擋牌，使用擋牌作出抵抗。
 		if (getHp() <= 300 && countHandCards(Card.Defense)>0)
 			use(Card.Defense);
