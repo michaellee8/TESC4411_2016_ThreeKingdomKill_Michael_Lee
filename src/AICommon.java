@@ -2,20 +2,25 @@ import comp.*;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class AICommon extends Hero {
+public class AICommon extends Hero {
     protected final double AgressiveCoefficient = 2.0; // Hero Specific, Controls in which porpotion of HP will hero switch between attack-sided and defense-sided
 
-    public abstract void join(int index);
+    public void join(int index) {/*
+                                 GameMaster master = GameMaster.getInstance();
+                                 GameMaster.Player player = master.players[index];
+                                 player.attList.add(new Attributes("Common", 400, 1, 2, 0, 0, Stage.Action));
+                                 player.heroes.add(this);*/
+    }
 
-    protected void beforeMyTurn() { // Hero specific
+    protected void beforeMyTurn() { // TO-DOs before the attack stage
 
     }
 
-    protected void afterMyTurn() { // Hero specific
+    protected void afterMyTurn() { // TO-DOs after the defense stage
 
     }
 
-    protected void inMyTurn() { // Hero specific
+    protected void inMyTurn() { // TO-DOs between attack stage and defense stage
 
     }
 
@@ -27,8 +32,8 @@ public abstract class AICommon extends Hero {
         return this.countHandCards(Card.Attack) > 0;
     }
 
-    protected static Card[] CardDiscardSequence = {Card.Repeal, Card.Grab, Card.Shield, Card.Axe, Card.Agility, Card.Vitality, Card.Attack,
-            Card.Defense, Card.Heal             };
+    protected static Card[] CardDiscardSequence = {Card.Repeal, Card.Grab, Card.Shield, Card.Axe, Card.Agility, Card.Attack, Card.Defense,
+            Card.Heal, Card.Vitality            };
 
     public void drawing() {
         draw();
@@ -92,8 +97,7 @@ public abstract class AICommon extends Hero {
                 use(Card.RepealX);
             }
         }
-
-        while (this.countHandCards(Card.Axe) > 0 || this.countHandCards(Card.Agility) > 0) {
+        AttackBuffWhile: while (this.countHandCards(Card.Axe) > 0 || this.countHandCards(Card.Agility) > 0) { // use Attack Buff
             if ((Arrays.asList(this.getBuffList()).contains(Card.Vitality) && Arrays.asList(this.getBuffList()).contains(Card.Shield))
                 && this.getHp() <= this.getMaxHp() / AgressiveCoefficient
                 || (Arrays.asList(this.getBuffList()).contains(Card.Agility) && Arrays.asList(this.getBuffList()).contains(Card.Axe))) {
@@ -101,45 +105,86 @@ public abstract class AICommon extends Hero {
             } else {
                 switch (this.countBuffs()) {
                     case 0:
-                        if (this.countHandCards(Card.Axe) > 0) {
-                            this.use(Card.Axe);
-                        }
-                        if (this.countHandCards(Card.Agility) > 0) {
+                        if (!Arrays.asList(this.getBuffList()).contains(Card.Agility) && this.countHandCards(Card.Agility) > 0) {
                             this.use(Card.Agility);
+                        } else if (!Arrays.asList(this.getBuffList()).contains(Card.Axe) && this.countHandCards(Card.Axe) > 0) {
+                            this.use(Card.Axe);
                         }
                         break;
                     case 1:
                         if (Arrays.asList(this.getBuffList()).contains(Card.Shield)
                             || Arrays.asList(this.getBuffList()).contains(Card.Vitality)) {
-                            if (this.countHandCards(Card.Attack) >= 2 && !Arrays.asList(this.getBuffList()).contains(Card.Agility)
-                                && this.countHandCards(Card.Agility) > 0) {
+                            if (this.countHandCards(Card.Attack) >= 2 && canAttack()
+                                && !Arrays.asList(this.getBuffList()).contains(Card.Agility) && this.countHandCards(Card.Agility) > 0) {
                                 this.use(Card.Agility);
-                            } else {
-                                if (!Arrays.asList(this.getBuffList()).contains(Card.Agility) && this.countHandCards(Card.Agility) > 0) {
-                                    this.use(Card.Agility);
-                                }
-                                if (!Arrays.asList(this.getBuffList()).contains(Card.Axe) && this.countHandCards(Card.Axe) > 0) {
-                                    this.use(Card.Axe);
-                                }
-                            }
-                        } else {
-                            if (!Arrays.asList(this.getBuffList()).contains(Card.Agility) && this.countHandCards(Card.Agility) > 0) {
+                            } else if (!Arrays.asList(this.getBuffList()).contains(Card.Agility) && this.countHandCards(Card.Agility) > 0) {
                                 this.use(Card.Agility);
-                            }
-                            if (!Arrays.asList(this.getBuffList()).contains(Card.Axe) && this.countHandCards(Card.Axe) > 0) {
+                            } else if (!Arrays.asList(this.getBuffList()).contains(Card.Axe) && this.countHandCards(Card.Axe) > 0) {
                                 this.use(Card.Axe);
                             }
+                        } else if (!Arrays.asList(this.getBuffList()).contains(Card.Agility) && this.countHandCards(Card.Agility) > 0) {
+                            this.use(Card.Agility);
+                        } else if (!Arrays.asList(this.getBuffList()).contains(Card.Axe) && this.countHandCards(Card.Axe) > 0) {
+                            this.use(Card.Axe);
                         }
                         break;
                     case 2:
-                        
+                        if (Arrays.asList(this.getBuffList()).contains(Card.Shield)) {
+                            this.deactivate(Card.Shield);
+                        } else if (Arrays.asList(this.getBuffList()).contains(Card.Vitality)) {
+                            this.deactivate(Card.Vitality);
+                        } else {
+                            break AttackBuffWhile;
+                        }
+                        if (this.countHandCards(Card.Agility) > 0 && this.countHandCards(Card.Attack) >= 2 && canAttack()
+                            && !Arrays.asList(this.getBuffList()).contains(Card.Agility)) {
+                            this.use(Card.Agility);
+                        } else if (!Arrays.asList(this.getBuffList()).contains(Card.Agility) && this.countHandCards(Card.Agility) > 0) {
+                            this.use(Card.Agility);
+                        } else if (!Arrays.asList(this.getBuffList()).contains(Card.Axe) && this.countHandCards(Card.Axe) > 0) {
+                            this.use(Card.Axe);
+                        } else {
+                            break AttackBuffWhile;
+                        }
+
                         break;
                     default:
                         break;
                 }
             }
         }
-
+        while (this.getAttackTimes() > 0 && canAttack()) { // use Card.Attack 
+            this.use(Card.Attack);
+        }
+        while (canAttack() && this.countHandCards(Card.Agility) > 0) { // use Card.Atack again if still have Card.Agility
+            this.deactivate(Card.Agility);
+            this.use(Card.Agility);
+            this.use(Card.Attack);
+        }
+        inMyTurn();
+        while (this.countHandCards(Card.Vitality) > 0 && this.getHp() + 70 <= this.getMaxHp()) { // use Card.Vitality
+            if (Arrays.asList(this.getBuffList()).contains(Card.Vitality)) {
+                this.deactivate(Card.Vitality);
+                this.use(Card.Vitality);
+            } else if (this.countBuffs() == 2) {
+                if (Arrays.asList(this.getBuffList()).contains(Card.Axe)) {
+                    this.deactivate(Card.Axe);
+                } else if (Arrays.asList(this.getBuffList()).contains(Card.Agility)) {
+                    this.deactivate(Card.Agility);
+                } else if (Arrays.asList(this.getBuffList()).contains(Card.Shield)) {
+                    this.deactivate(Card.Shield);
+                } else if (Arrays.asList(this.getBuffList()).contains(Card.Vitality)) {
+                    this.deactivate(Card.Vitality);
+                } else {
+                    break;
+                }
+                if (this.countBuffs() < 2) {
+                    this.use(Card.Vitality);
+                } else {
+                    break;
+                }
+            }
+        }
         afterMyTurn();
     }
 
