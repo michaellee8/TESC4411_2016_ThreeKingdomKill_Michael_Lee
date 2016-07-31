@@ -7,11 +7,6 @@ import java.util.List;
 public class AICommon extends Hero {
     protected double AgressiveCoefficient = 2.0; // Hero Specific, Controls in which porpotion of HP will hero switch between attack-sided and defense-sided mode, 2.0 is average, higher means more aggressive
 
-
-    public AICommon() { // Constructor
-
-    }
-
     public void join(int index) { // this method turn this plain, no-skill AI Hero into a complete Hero, for testing purpose
         GameMaster master = GameMaster.getInstance();
         GameMaster.Player player = master.players[index];
@@ -68,17 +63,23 @@ public class AICommon extends Hero {
                 use(Card.Grab);
             }
         }
-        while (countHandCards(Card.Repeal) > 0) { // use Card.Repeal
+        while (countHandCards(Card.Repeal) > 0
+               && (GameMaster.getInstance().countOppHandCards() > 0 || GameMaster.getInstance().countOppBuffs() > 0)) { // use Card.Repeal
             if (GameMaster.getInstance().countOppBuffs() > 0) {
                 List<Card> oppBuffCardList = Arrays.asList(GameMaster.getInstance().getOppBuffList());
-                if (oppBuffCardList.contains(Card.Vitality)) {
+                if (oppBuffCardList.contains(Card.Vitality)
+                    && GameMaster.getInstance().getOppHp() + 75 >= GameMaster.getInstance().getOppMaxHp()) {
                     use(Card.Repeal, Card.Vitality);
+                } else if (GameMaster.getInstance().countOppHandCards() <= 2 && this.countHandCards(Card.Attack) > 0) {
+                    use(Card.Repeal);
                 } else if (oppBuffCardList.contains(Card.Shield)) {
                     use(Card.Repeal, Card.Shield);
                 } else if (oppBuffCardList.contains(Card.Agility)) {
                     use(Card.Repeal, Card.Agility);
                 } else if (oppBuffCardList.contains(Card.Axe)) {
                     use(Card.Repeal, Card.Axe);
+                } else if (oppBuffCardList.contains(Card.Vitality)) {
+                    use(Card.Vitality, Card.Shield);
                 } else {
                     use(Card.Repeal);
                 }
@@ -86,28 +87,7 @@ public class AICommon extends Hero {
                 use(Card.Repeal);
             }
         }
-        while (countHandCards(Card.RepealX) > 0) { // use Card.RepealX for
-                                                   // HeroGanNing
-            if (GameMaster.getInstance().countOppBuffs() > 0) {
-                List<Card> oppBuffCardList = Arrays.asList(GameMaster.getInstance().getOppBuffList());
-                if (oppBuffCardList.contains(Card.Vitality)) {
-                    use(Card.RepealX, Card.Vitality);
-                } else if (oppBuffCardList.contains(Card.Shield)) {
-                    use(Card.RepealX, Card.Shield);
-                } else if (oppBuffCardList.contains(Card.Agility)) {
-                    use(Card.RepealX, Card.Agility);
-                } else if (oppBuffCardList.contains(Card.Axe)) {
-                    use(Card.RepealX, Card.Axe);
-                } else {
-                    use(Card.RepealX);
-                }
-            } else {
-                use(Card.RepealX);
-            }
-        }
-        AttackBuffWhile: while (this.countHandCards(Card.Axe) > 0 || this.countHandCards(Card.Agility) > 0) { // use
-                                                                                                              // Attack
-                                                                                                              // Buff
+        AttackBuffWhile: while (this.countHandCards(Card.Axe) > 0 || this.countHandCards(Card.Agility) > 0) { // use Attack Buff
             if ((Arrays.asList(this.getBuffList()).contains(Card.Vitality) && Arrays.asList(this.getBuffList()).contains(Card.Shield))
                 && this.getHp() <= this.getMaxHp() / AgressiveCoefficient
                 || (Arrays.asList(this.getBuffList()).contains(Card.Agility) && Arrays.asList(this.getBuffList()).contains(Card.Axe))) {
