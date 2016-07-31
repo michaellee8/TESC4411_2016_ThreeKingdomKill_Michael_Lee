@@ -7,6 +7,7 @@ import java.util.List;
 public class AICommon extends Hero {
     protected double AgressiveCoefficient = 2.0; // Hero Specific, Controls in which porpotion of HP will hero switch between attack-sided and defense-sided mode, 2.0 is average, higher means more aggressive
 
+
     public AICommon() { // Constructor
 
     }
@@ -17,6 +18,7 @@ public class AICommon extends Hero {
         player.attList.add(new Attributes("Common", 400, 1, 2, 0, 0, Stage.Action));
         player.heroes.add(this);
     }
+
 
     protected void beforeMyTurn() { // TO-DOs before the attack stage
 
@@ -103,7 +105,9 @@ public class AICommon extends Hero {
                 use(Card.RepealX);
             }
         }
-        AttackBuffWhile: while (this.countHandCards(Card.Axe) > 0 || this.countHandCards(Card.Agility) > 0) { // use Attack Buff
+        AttackBuffWhile: while (this.countHandCards(Card.Axe) > 0 || this.countHandCards(Card.Agility) > 0) { // use
+                                                                                                              // Attack
+                                                                                                              // Buff
             if ((Arrays.asList(this.getBuffList()).contains(Card.Vitality) && Arrays.asList(this.getBuffList()).contains(Card.Shield))
                 && this.getHp() <= this.getMaxHp() / AgressiveCoefficient
                 || (Arrays.asList(this.getBuffList()).contains(Card.Agility) && Arrays.asList(this.getBuffList()).contains(Card.Axe))) {
@@ -159,16 +163,23 @@ public class AICommon extends Hero {
                 }
             }
         }
-        while (this.getAttackTimes() > 0 && canAttack()) { // use Card.Attack 
+        while (this.getAttackTimes() > 0 && canAttack()) { // use Card.Attack
             this.use(Card.Attack);
         }
-        while (canAttack() && this.countHandCards(Card.Agility) > 0) { // use Card.Atack again if still have Card.Agility
+        while (canAttack() && this.countHandCards(Card.Agility) > 0) { // use
+                                                                       // Card.Atack
+                                                                       // again
+                                                                       // if
+                                                                       // still
+                                                                       // have
+                                                                       // Card.Agility
             this.deactivate(Card.Agility);
             this.use(Card.Agility);
             this.use(Card.Attack);
         }
         inMyTurn();
-        while (this.countHandCards(Card.Vitality) > 0 && this.getHp() + 75 <= this.getMaxHp()) { // use Card.Vitality
+        while (this.countHandCards(Card.Vitality) > 0 && this.getHp() + 75 <= this.getMaxHp()) { // use
+                                                                                                 // Card.Vitality
             if (Arrays.asList(this.getBuffList()).contains(Card.Vitality)) {
                 this.deactivate(Card.Vitality);
                 this.use(Card.Vitality);
@@ -191,7 +202,8 @@ public class AICommon extends Hero {
                 }
             }
         }
-        while (this.countHandCards(Card.Heal) > 0 && this.getHp() + 75 <= this.getMaxHp()) { // use Card.Heal
+        while (this.countHandCards(Card.Heal) > 0 && this.getHp() + 75 <= this.getMaxHp()) { // use
+                                                                                             // Card.Heal
             this.use(Card.Heal);
         }
         while (this.countHandCards(Card.Shield) > 0) { // use Card.Shield
