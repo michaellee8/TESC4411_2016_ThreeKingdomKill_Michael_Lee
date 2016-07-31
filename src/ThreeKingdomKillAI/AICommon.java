@@ -7,11 +7,15 @@ import java.util.List;
 public class AICommon extends Hero {
     protected double AgressiveCoefficient = 2.0; // Hero Specific, Controls in which porpotion of HP will hero switch between attack-sided and defense-sided mode, 2.0 is average, higher means more aggressive
 
-    public void join(int index) {/*
-                                 GameMaster master = GameMaster.getInstance();
-                                 GameMaster.Player player = master.players[index];
-                                 player.attList.add(new Attributes("Common", 400, 1, 2, 0, 0, Stage.Action));
-                                 player.heroes.add(this);*/
+    public AICommon() { // Constructor
+
+    }
+
+    public void join(int index) { // this method turn this plain, no-skill AI Hero into a complete Hero, for testing purpose
+        GameMaster master = GameMaster.getInstance();
+        GameMaster.Player player = master.players[index];
+        player.attList.add(new Attributes("Common", 400, 1, 2, 0, 0, Stage.Action));
+        player.heroes.add(this);
     }
 
     protected void beforeMyTurn() { // TO-DOs before the attack stage
