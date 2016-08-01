@@ -2,18 +2,7 @@ package ThreeKingdomKillAI;
 
 import comp.*;
 
-public class AIHuangGai extends AICommon {
-    public final void join(int index) {
-        GameMaster master = GameMaster.getInstance();
-        GameMaster.Player player = master.players[index];
-        player.attList.add(new Attributes("黄蓋", 400, 1, 2, 0, 0, Stage.Action));
-        player.heroes.add(this);
-    }
-
-    public final void spec() {
-        GameMaster.getInstance().specHuangeGai();
-    }
-
+public class AIHuangGai extends AICoreHuangGai {
     @Override
     public void beingAttack() {
         if (this.canDefense()
@@ -30,9 +19,10 @@ public class AIHuangGai extends AICommon {
         if (this.getHp() + 50 >= this.getMaxHp() && this.countHandCards() < 8) {
             this.spec();
         }
-        while ((this.countHandCards(Card.Heal) > 0 || this.countHandCards(Card.Vitality) > 0)&& this.getHp()-75 >= this.getMaxHp() / 2 && this.countHandCards() < 8) {
+        while ((this.countHandCards(Card.Heal) > 0 || this.countHandCards(Card.Vitality) > 0) && this.getHp() - 75 >= this.getMaxHp() / 2
+               && this.countHandCards() < 8) {
             this.spec();
-            if (this.countHandCards(Card.Heal) > 0){
+            if (this.countHandCards(Card.Heal) > 0) {
                 use(Card.Heal);
             }
         }
@@ -40,9 +30,10 @@ public class AIHuangGai extends AICommon {
 
     @Override
     protected void inMyTurn() {
-        while ((this.countHandCards(Card.Heal) > 0 || this.countHandCards(Card.Vitality) > 0)&& this.getHp()-75 >= this.getMaxHp() / 2 && this.countHandCards() < 8) {
+        while ((this.countHandCards(Card.Heal) > 0 || this.countHandCards(Card.Vitality) > 0) && this.getHp() - 75 >= this.getMaxHp() / 2
+               && this.countHandCards() < 8) {
             this.spec();
-            if (this.countHandCards(Card.Heal) > 0){
+            if (this.countHandCards(Card.Heal) > 0) {
                 use(Card.Heal);
             }
         }

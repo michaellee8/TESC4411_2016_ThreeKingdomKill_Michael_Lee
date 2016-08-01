@@ -2,20 +2,8 @@ package ThreeKingdomKillAI;
 
 import comp.*;
 
-public class AIGanNing extends AICommon {
+public class AIGanNing extends AICoreGanNing {
     private final int DifferenceOfCardsToUseSpec = 3;
-
-    @Override
-    public final void join(int index) {
-        GameMaster master = GameMaster.getInstance();
-        GameMaster.Player player = master.players[index];
-        player.attList.add(new Attributes("甘寧", 400, 1, 2, 0, 0, Stage.Action));
-        player.heroes.add(this);
-    }
-
-    public final void spec(Card card) {
-        GameMaster.getInstance().specGanNing(card);
-    }
 
     @Override
     protected void beforeMyTurn() {

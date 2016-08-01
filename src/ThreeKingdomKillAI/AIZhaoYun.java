@@ -2,14 +2,7 @@ package ThreeKingdomKillAI;
 
 import comp.*;
 
-public class AIZhaoYun extends AICommon {
-    public final void join(int index) {
-        GameMaster master = GameMaster.getInstance();
-        GameMaster.Player player = master.players[index];
-        player.attList.add(new Attributes("趙雲", 400, 1, 2, 0, 0, null));
-        player.heroes.add(this);
-    }
-
+public class AIZhaoYun extends AICoreZhaoYun {
     @Override
     protected Boolean canDefense() {
         return (this.countHandCards(Card.Defense) + this.countHandCards(Card.Attack)) > 0;

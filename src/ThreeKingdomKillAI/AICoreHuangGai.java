@@ -4,11 +4,9 @@ import comp.*;
 import java.util.Arrays;
 import java.util.List;
 
-abstract class AICommon extends Hero {
+class AICoreHuangGai extends HeroHuangGai {
     protected double AgressiveCoefficient = 2.0; // Hero Specific, Controls in which porpotion of HP will hero switch between attack-sided and defense-sided mode, 2.0 is average, higher means more aggressive
-    
-    public abstract void join(int side);
-    
+
     protected void beforeMyTurn() { // TO-DOs before the attack stage
 
     }
