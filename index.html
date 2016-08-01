@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>TESC4411_2016_ThreeKingdomKill_Michael_Lee by michaellee8</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">TESC4411_2016_ThreeKingdomKill_Michael_Lee</h1>
+      <h2 class="project-tagline"></h2>
+      <a href="https://github.com/michaellee8/TESC4411_2016_ThreeKingdomKill_Michael_Lee" class="btn">View on GitHub</a>
+      <a href="https://github.com/michaellee8/TESC4411_2016_ThreeKingdomKill_Michael_Lee/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/michaellee8/TESC4411_2016_ThreeKingdomKill_Michael_Lee/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="heros-of-three-kingdoms" class="anchor" href="#heros-of-three-kingdoms" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Heros of Three Kingdoms</h1>
+
+<p>This is the final project of course TECS4411 "Coding Heroes of the Three Kingdoms", studied at 2016 summer holiday.</p>
+
+<p>The aim of such a project is to practice skill learnt in the course.</p>
+
+<h2>
+<a id="teammates-isare" class="anchor" href="#teammates-isare" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Teammates is/are:</h2>
+
+<ol>
+<li>Michael Lee (<a href="https://github.com/michaellee8" class="user-mention">@michaellee8</a>)</li>
+<li>Alex Lee (<a href="https://github.com/alexlee5354" class="user-mention">@alexlee5354</a>)</li>
+</ol>
+
+<h2>
+<a id="resources" class="anchor" href="#resources" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Resources:</h2>
+
+<p>Project main library: <a href="">comp.Kingdom.jar</a></p>
+
+<p>Sample AI library: <a href="">ThreeKingdomKillAI.jar</a></p>
+
+<p>Introduction pdf: <a href="">Kingdom6.CodingHeroContest.pdf</a></p>
+
+<p>package comp API reference: <a href="http://www.comp.hkbu.edu.hk/%7Emandel/kingdom/">http://www.comp.hkbu.edu.hk/~mandel/kingdom/</a></p>
+
+<p>To launch the program, you need a piece of code to start the program.</p>
+
+<p>Sample code:</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">import</span> <span class="pl-smi">comp.*</span>;
+<span class="pl-k">import</span> <span class="pl-smi">ThreeKingdomKillAI.*</span>;
+
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">KingdomTest</span> {
+
+    <span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">void</span> <span class="pl-en">main</span>(<span class="pl-k">String</span>[] <span class="pl-v">args</span>) {
+        <span class="pl-smi">GameMaster</span> master <span class="pl-k">=</span> <span class="pl-smi">GameMaster</span><span class="pl-k">.</span>getInstance();
+
+        master<span class="pl-k">.</span>setLightning(<span class="pl-c1">30</span>);
+
+        <span class="pl-k">int</span> side <span class="pl-k">=</span> <span class="pl-c1">0</span>;
+        master<span class="pl-k">.</span>setPlayer(side, <span class="pl-s"><span class="pl-pds">"</span>左方<span class="pl-pds">"</span></span>);
+
+        <span class="pl-k">new</span> <span class="pl-smi">AIHuangGai</span>()<span class="pl-k">.</span>join(side);
+        <span class="pl-k">new</span> <span class="pl-smi">AIXiaHouDun</span>()<span class="pl-k">.</span>join(side);
+        <span class="pl-k">new</span> <span class="pl-smi">AIZhangLiao</span>()<span class="pl-k">.</span>join(side);
+
+        side <span class="pl-k">=</span> <span class="pl-c1">1</span>;
+        master<span class="pl-k">.</span>setPlayer(side, <span class="pl-s"><span class="pl-pds">"</span>右方<span class="pl-pds">"</span></span>);
+
+        <span class="pl-k">new</span> <span class="pl-smi">AIXuChu</span>()<span class="pl-k">.</span>join(side);
+        <span class="pl-k">new</span> <span class="pl-smi">AIZhaoYun</span>()<span class="pl-k">.</span>join(side);
+        <span class="pl-k">new</span> <span class="pl-smi">AIMaChao</span>()<span class="pl-k">.</span>join(side);
+
+                master<span class="pl-k">.</span>setVisible(<span class="pl-c1">0</span>, <span class="pl-c1">false</span>);
+        master<span class="pl-k">.</span>setVisible(<span class="pl-c1">1</span>, <span class="pl-c1">false</span>);
+        master<span class="pl-k">.</span>start();
+    }
+}</pre></div>
+
+<p>Test those codes and do your programming!</p>
+
+<p>You may also develop your own AI library as well.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/michaellee8/TESC4411_2016_ThreeKingdomKill_Michael_Lee">TESC4411_2016_ThreeKingdomKill_Michael_Lee</a> is maintained by <a href="https://github.com/michaellee8">michaellee8</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
