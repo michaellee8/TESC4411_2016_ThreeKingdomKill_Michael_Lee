@@ -6,9 +6,9 @@ import java.util.List;
 
 abstract class AICommon extends Hero {
     protected double AgressiveCoefficient = 2.0; // Hero Specific, Controls in which porpotion of HP will hero switch between attack-sided and defense-sided mode, 2.0 is average, higher means more aggressive
-    
+
     public abstract void join(int side);
-    
+
     protected void beforeMyTurn() { // TO-DOs before the attack stage
 
     }
@@ -38,7 +38,8 @@ abstract class AICommon extends Hero {
 
     public void myTurn() {
         beforeMyTurn();
-        while (countHandCards(Card.Grab) > 0) { // use Card.Grab
+        while (countHandCards(Card.Grab) > 0
+               && (GameMaster.getInstance().countOppBuffs() + GameMaster.getInstance().countOppHandCards()) > 0) { // use Card.Grab
             if (GameMaster.getInstance().countOppBuffs() > 0 && this.countBuffs() < 2) {
                 List<Card> oppBuffCardList = Arrays.asList(GameMaster.getInstance().getOppBuffList());
                 List<Card> myBuffCardList = Arrays.asList(this.getBuffList());
