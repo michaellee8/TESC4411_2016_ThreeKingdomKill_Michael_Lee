@@ -1,4 +1,5 @@
 import comp.*;
+import ThreeKingdomKillAI.*;
 
 public class Kingdom {
 	
@@ -10,23 +11,22 @@ public class Kingdom {
 		int side = 0;
 		master.setPlayer(side, "左方");
 
-		new Manual("HeroHuangGai").join(side);
-
+		new AIHuangGai().join(side);
+		new AIXiaHouDun().join(side);
+		new AIZhangLiao().join(side);
 		
 		side = 1;
 		master.setPlayer(side, "右方");
 
-		new DummyXuChu().join(side);
-		new DummyZhaoYun().join(side);
-		new DummyMaChao().join(side);
-//		new DummyHuangGai().join(side);
-//		new DummyXiaHouDun().join(side);
-//		new DummyZhangLiao().join(side);
+		new AIXuChu().join(side);
+		new AIZhaoYun().join(side);
+		new AIMaChao().join(side);
 //		new DummyZhouYu().join(side);
 //		new DummyGanNing().join(side);
 //		new DummyZhangFei().join(side);
 
-		master.setVisible(1, false);
+		master.setVisible(1, true);
+		master.setVisible(0, true);
 		master.start();
 	}
 
