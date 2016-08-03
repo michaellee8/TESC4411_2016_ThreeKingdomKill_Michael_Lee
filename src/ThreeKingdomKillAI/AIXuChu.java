@@ -191,11 +191,8 @@ class AICoreXuChu extends HeroXuChu {
 				} else {
 					break;
 				}
-				if (this.countBuffs() < 2) {
-					this.use(Card.Vitality);
-				} else {
-					break;
-				}
+			} else {
+				this.use(Card.Vitality);
 			}
 			i++;
 		}
