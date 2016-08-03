@@ -1,0 +1,27 @@
+﻿Merge branch 'master' into ml
+
+# Conflicts:
+#	README.md
+#	bin/.gitignore
+#	kingdom.script
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch ml
+# Your branch is up-to-date with 'origin/ml'.
+#
+# Changes to be committed:
+#	modified:   .classpath
+#	modified:   .settings/org.eclipse.core.resources.prefs
+#	modified:   README.md
+#	new file:   bin/.gitignore
+#	new file:   comp.Kingdom.jar
+#	new file:   comp.Kingdom.jar.src.zip
+#	new file:   jd-gui-1.4.0.jar
+#	modified:   kingdom.script
+#	new file:   src/KingdomTest.java
+#
+# Untracked files:
+#	fajkiqiv.kb0.txt
+#
+
