@@ -226,7 +226,7 @@ class AICoreZhangLiao extends HeroZhangLiao {
 	public void discarding() {
 		for (int i = 0; i < CardDiscardSequence.length; i++) {
 			while (countHandCards(CardDiscardSequence[i]) > 0
-					&& this.countHandCards() > Math.ceil(this.getHp() / 0.01)) {
+					&& this.countHandCards() > Math.ceil(this.getHp() * 0.01)) {
 				discard(CardDiscardSequence[i]);
 			}
 		}
