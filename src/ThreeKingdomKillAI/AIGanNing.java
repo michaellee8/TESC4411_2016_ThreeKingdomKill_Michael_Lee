@@ -224,7 +224,7 @@ class AICoreGanNing extends HeroGanNing {
 	public void discarding() {
 		for (int i = 0; i < CardDiscardSequence.length; i++) {
 			while (countHandCards(CardDiscardSequence[i]) > 0
-					&& this.countHandCards() > Math.ceil(this.getHp() / 0.01)) {
+					&& this.countHandCards() > Math.ceil(this.getHp() * 0.01)) {
 				discard(CardDiscardSequence[i]);
 			}
 		}
@@ -242,7 +242,7 @@ public class AIGanNing extends AICoreGanNing {
 
     @Override
     protected void beforeMyTurn() {
-        if (this.countHandCards() + DifferenceOfCardsToUseSpec >= Math.ceil(this.getHp() / 0.01)) {
+        if (this.countHandCards() + DifferenceOfCardsToUseSpec >= Math.ceil(this.getHp() * 0.01)) {
             if (this.countHandCards(Card.Axe) > 0 || this.countHandCards(Card.Agility) > 0 || this.countHandCards(Card.Shield) > 0) {
                 if (GameMaster.getInstance().isActiveOpp(Card.Vitality)
                     && GameMaster.getInstance().getOppHp() + 75 >= GameMaster.getInstance().getOppMaxHp()) {
