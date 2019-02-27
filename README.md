@@ -27,3 +27,6 @@ Commit your code in your own branch.
 
 ## Further Target
 * It seems that we can change some behavior and attritbute of the game if we implement the `Hero` classes by ourself, let's test those tricks after finishing TO-DOs. Check out the decompiled source code file for how to do that.
+
+## Build/Run
+IntelliJ IDEA configuration included, feel free to try it out.
